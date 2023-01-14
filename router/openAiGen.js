@@ -3,9 +3,7 @@ const router = express.Router();
 const {generateImageCallback} = require('../controllers/openAiContro')
 
 
-router.post('/generateImage', (req,res)=>{
-    console.log(res);
-})
+router.post('/generateImage', generateImageCallback)
 
 
 module.exports = router
