@@ -13,7 +13,7 @@ export const Section = ()=>{
     const image = useContext(PromptContext)
 
     const Item = styled(Paper)(({ theme }) => ({
-        height: '92vh',
+        height: '94vh',
         width: '100%',
         color: theme.palette.text.secondary,
         display: 'flex',

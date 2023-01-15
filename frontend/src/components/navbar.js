@@ -8,11 +8,9 @@ export const NavBar = ()=>{
 
 
     return (
-        <AppBar style={{background: 'blue', height: '8vh'}} position="static">
+        <AppBar style={{background: 'black', height: '6vh'}} position="static">
             <Toolbar variant="dense">
-                <Typography variant="h6" color="inherit" component="div">
-                    Ai generated images
-                </Typography>
+                <img style={{width: 35, height: 35}} src={require('../assets/images/logo.png')}/>
             </Toolbar>
         </AppBar>
     )

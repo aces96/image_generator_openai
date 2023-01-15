@@ -40,24 +40,13 @@
 
 .main {
   width: '100%';
-  height: 100vh;
-  background-color: #EAEAEA;
+  height: 92vh;
+  background-color: #EDF2F6;
 }
 
 .MuiTextField-root{
   border-color: white;
 }
 
-.artStyleCont{
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-around;
-  max-width: 300px;
-}
 
-.artStyleCont > div {
-  width: 80px;
-  height: 100px;
-  margin-bottom: 20px;
 
-}
