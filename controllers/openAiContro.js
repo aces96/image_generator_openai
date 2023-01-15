@@ -9,10 +9,14 @@ const openai = new OpenAIApi(configuration);
 
 
 const generateImageCallback = async (req, res)=>{
+
+    console.log(req.body.artStyle);
+    console.log(req.body.prompt);
         try {
             const generateImage = await openai.createImage({
-                prompt: 'in Realistic style generate camel',
-                n: 1
+                prompt: req.body.artStyle+req.body.prompt,
+                n: 1,
+                size: "512x512",
             })
 
             const image = generateImage.data.data[0].url
