@@ -48,4 +48,16 @@
   border-color: white;
 }
 
+.artStyleCont{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  max-width: 300px;
+}
 
+.artStyleCont > div {
+  width: 80px;
+  height: 100px;
+  margin-bottom: 20px;
+
+}

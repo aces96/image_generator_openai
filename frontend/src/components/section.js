@@ -1,48 +1,16 @@
 import Grid from '@mui/material/Grid';
 import { PromptContainer } from './promptContainer';
+import { PromptContext } from '../promptContext';
 import Paper from '@mui/material/Paper';
 import { styled } from '@mui/material/styles';
-import { useState, useEffect } from 'react';
-import axios from 'axios';
+import { useContext } from 'react';
 
 
 
 
 export const Section = ()=>{
 
-    const [prompt, setPrompt] = useState()
-    const [artStyle, setArtStyle] = useState('')
-    const [image,setImage] = useState('')
-
-
-
-    const handleChange = (e)=>{
-        console.log(e.target.value)
-        setPrompt(e.target.value)
-    }
-
-    const handleClick = async ()=>{
-            try {
-                const image = await axios.post('http://localhost:8080/openai/generateImage', {
-                    prompt: prompt,
-                    artStyle: artStyle
-                }, {
-                    headers: {
-                        'Content-Type': 'application/x-www-form-urlencoded',
-                        'Authorization': `Bearer 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`,
-
-                    }
-
-                })
-
-                setImage(image.data.image)
-
-                console.log(image);
-            } catch (error) {
-                console.log(error.response.data.error);
-            }
-    }
-
+    const image = useContext(PromptContext)
 
     const Item = styled(Paper)(({ theme }) => ({
         height: '92vh',
@@ -60,13 +28,13 @@ export const Section = ()=>{
             <Grid container spacing={2}>
                 <Grid  xs={4}>
                     <Item>
-                        <PromptContainer value={prompt} setValue={setArtStyle} handleClick={handleClick} handleChange={handleChange}/>
+                        <PromptContainer/>
                     </Item>
                 </Grid>
 
-                <Grid xs={8}>
+                <Grid  xs={8}>
                     <Item>
-                        <img src={image}/>
+                        <img src={image[0]}/>
                     </Item>
                 </Grid>
             </Grid>
