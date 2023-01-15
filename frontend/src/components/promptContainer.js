@@ -23,12 +23,14 @@ export const PromptContainer = (props)=>{
     const [btn4, setBtn4] = useState(false)
     const [btn5, setBtn5] = useState(false)
     const [btn6, setBtn6] = useState(false)
-    const [btnSize1, setBtnSize1] = useState(true)
+    const [btnSize1, setBtnSize1] = useState(false)
     const [btnSize2, setBtnSize2] = useState(false)
     const [btnSize3, setBtnSize3] = useState(false)
+    const [size,setSize] = useState("512x512")
 
     const button = <Button onClick={()=>{
-            FileSaver.saveAs(imageContext[0], 'image.jpg')
+            const image = FileSaver.saveAs(`data:image/png;base64,${image[0]}`, 'image.jpg')
+            console.log("image", image);
     }} style={{width: '80%', height: '70%', borderRadius: 10}} variant='contained' color='success'>Download</Button>
 
 
@@ -56,18 +58,26 @@ export const PromptContainer = (props)=>{
         try {
             const image = await axios.post('http://localhost:8080/openai/generateImage', {
                 prompt: inputRef.current.value,
-                artStyle: artStyle
+                artStyle: artStyle,
+                size: size
             }, {
                 headers: {
                     'Content-Type': 'application/json',
-                    'Authorization': `Bearer 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`
+                    'Authorization': `Bearer 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`
                 }
 
             })
 
-            imageContext[1](image.data.image)
+            imageContext[1](image.data.image.data[0].b64_json)
 
             setDisabled(false)
+            setBtn1(true)
+            setBtn2(false)
+            setBtn3(false)
+            setBtn4(false)
+            setBtn5(false)
+            setBtn6(false)
+            setArtStyle('in comic style')
 
             console.log(image);
         } catch (error) {
@@ -99,18 +109,21 @@ export const PromptContainer = (props)=>{
                         setBtnSize1(true)
                         setBtnSize2(false)
                         setBtnSize3(false)
+                        setSize('256x256')
                     }} variant='outlined' style={{width: '30%', height: '100%', borderRaidius: 5, backgroundColor: btnSize1 && '#185ADB', color: btnSize1 && 'white'}}>Small</Button>
                     
                     <Button onClick={()=>{
                         setBtnSize1(false)
                         setBtnSize2(true)
                         setBtnSize3(false)
+                        setSize('512x512')
                     }} variant='outlined' style={{width: '30%', height: '100%', borderRaidius: 5, backgroundColor: btnSize2 && '#185ADB', color: btnSize2 && 'white' }}>Medium</Button>
                     
                     <Button onClick={()=>{
                         setBtnSize1(false)
                         setBtnSize2(false)
                         setBtnSize3(true)
+                        setSize('1024x1024')
                     }} variant='outlined' style={{width: '30%', height: '100%', borderRaidius: 5, backgroundColor: btnSize3 && '#185ADB', color: btnSize3 && 'white'}}>Large</Button>
                 </div>
 

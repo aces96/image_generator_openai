@@ -16,17 +16,17 @@ const generateImageCallback = async (req, res)=>{
             const generateImage = await openai.createImage({
                 prompt: req.body.artStyle+req.body.prompt,
                 n: 1,
-                size: "512x512",
+                response_format: "b64_json"
             })
 
             const image = generateImage.data.data[0].url
 
             res.status(200).json({
                 success: true,
-                image: image
+                image: generateImage.data
             })
         } catch (error) {
-            res.status(400).send(error)
+            res.send(error.data)
         }
 }
 

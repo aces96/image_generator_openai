@@ -7,12 +7,12 @@ const openaiRoute = require('./router/openAiGen')
 
 const app = express()
 
-app.use(cors());
-
-app.options('*', cors());
 
 app.use(express.json());
 app.use(express.urlencoded({extended:true}))
+app.use(cors());
+
+app.options('*', cors());
 
 
 app.use('/openai', openaiRoute)
